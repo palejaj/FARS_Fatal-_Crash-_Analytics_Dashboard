@@ -4,13 +4,35 @@ import plotly.express as px
 import us
 from sklearn.linear_model import LinearRegression
 import numpy as np
+import os
+import gdown
 
 # === Load Data ===
 @st.cache_data(show_spinner=True)
 def load_data():
-    accident_df = pd.read_csv("fars_accidents_1975_2023_cleaned.csv", low_memory=False)
-    person_df = pd.read_csv("fars_person_2008_2023_combined.csv", low_memory=False)
-    drugs_df = pd.read_csv("fars_drugs_2008_2023_combined.csv", low_memory=False)
+    # Google Drive File IDs
+    accident_id = "1KjeqZrNVGniToUYrW9uQOWckeVFEmRCy"
+    person_id   = "1LRnoGp_CMhRNwq9QhUlgA8h7qfR6dja1"
+    drugs_id    = "1iY22o27KKHMhF5b2Rih1N3AJipsjW59D"
+
+    # File names to download to
+    accident_file = "fars_accidents_1975_2023_cleaned.csv"
+    person_file = "fars_person_2008_2023_combined.csv"
+    drugs_file = "fars_drugs_2008_2023_combined.csv"
+
+    if not os.path.exists(accident_file):
+        gdown.download(f"https://drive.google.com/uc?id={accident_id}", accident_file, quiet=False)
+
+    if not os.path.exists(person_file):
+        gdown.download(f"https://drive.google.com/uc?id={person_id}", person_file, quiet=False)
+
+    if not os.path.exists(drugs_file):
+        gdown.download(f"https://drive.google.com/uc?id={drugs_id}", drugs_file, quiet=False)
+
+    accident_df = pd.read_csv(accident_file, low_memory=False)
+    person_df = pd.read_csv(person_file, low_memory=False)
+    drugs_df = pd.read_csv(drugs_file, low_memory=False)
+
     return accident_df, person_df, drugs_df
 
 accident_df, person_df, drugs_df = load_data()
@@ -20,6 +42,21 @@ accident_df = accident_df[accident_df["YEAR"].between(2008, 2023)]
 person_df = person_df[person_df["YEAR"].between(2008, 2023)]
 drugs_df = drugs_df[drugs_df["YEAR"].between(2008, 2023)]
 
+# === Sidebar Filters ===
+st.sidebar.header("Filter Options")
+years = sorted(accident_df["YEAR"].unique())
+states = sorted(accident_df["STATENAME"].dropna().unique())
+
+selected_years = st.sidebar.multiselect("Select Year(s)", years, default=years)
+selected_states = st.sidebar.multiselect("Select State(s)", states, default=states)
+
+# Filter data
+accident_df_filtered = accident_df[
+    (accident_df["YEAR"].isin(selected_years)) &
+    (accident_df["STATENAME"].isin(selected_states))
+]
+person_df_filtered = person_df[person_df["YEAR"].isin(selected_years)]
+drugs_df_filtered = drugs_df[drugs_df["YEAR"].isin(selected_years)]
 # === Sidebar Filters ===
 st.sidebar.header("Filter Options")
 years = sorted(accident_df["YEAR"].unique())

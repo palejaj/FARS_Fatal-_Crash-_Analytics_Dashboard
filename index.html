@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FARS Fatal Crash Analytics Dashboard</title>
+    <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/automobile_1f697.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7fa;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 40px 32px 32px 32px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5em;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            vertical-align: middle;
+        }
+        .desc {
+            font-size: 1.15rem;
+            margin-bottom: 2em;
+            color: #555;
+        }
+        .launch-btn {
+            display: inline-block;
+            background: #0099ff;
+            color: #fff;
+            font-size: 1.1rem;
+            padding: 0.8em 2.2em;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,153,255,0.08);
+            transition: background 0.2s;
+        }
+        .launch-btn:hover {
+            background: #007acc;
+        }
+        .github-link {
+            display: block;
+            margin-top: 2.5em;
+            color: #333;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .github-link:hover {
+            text-decoration: underline;
+        }
+        .howto {
+            margin-top: 2.5em;
+            text-align: left;
+            background: #f0f4fa;
+            border-radius: 8px;
+            padding: 1.2em 1.5em;
+            font-size: 1rem;
+        }
+        code {
+            background: #eaeaea;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.98em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="emoji">🚗</span>
+        <h1>FARS Fatal Crash Analytics Dashboard</h1>
+        <div class="desc">
+            Interactive dashboard for exploring US fatal crash data (2008–2023) with visual analytics.<br>
+            Built with <b>Streamlit</b> and <b>Plotly</b>.
+        </div>
+        <a class="launch-btn" href="https://share.streamlit.io/" target="_blank">🚀 Launch Dashboard</a>
+        <a class="github-link" href="https://github.com/YOUR_GITHUB_USERNAME/FARS_Fatal_Crash_Analytics_Dashboard" target="_blank">
+            View Source on GitHub
+        </a>
+        <div class="howto">
+            <b>How to run locally:</b><br>
+            <ol>
+                <li>Clone this repo:<br><code>git clone https://github.com/YOUR_GITHUB_USERNAME/FARS_Fatal_Crash_Analytics_Dashboard.git</code></li>
+                <li>Install requirements:<br><code>pip install -r requirements.txt</code></li>
+                <li>Run the dashboard:<br><code>streamlit run dashboard1.py</code></li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
